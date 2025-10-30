@@ -1,14 +1,14 @@
-let
-  nixpkgs = fetchTarball "https://github.com/NixOS/nixpkgs/tarball/nixos-25.05";
-  pkgs = import nixpkgs {
-    config = {};
-    overlays = [];
-  };
-in
-  pkgs.mkShell {
-    packages = with pkgs; [
-      cargo
-      alejandra
-      rustc
-    ];
-  }
+pkgs:
+pkgs.stdenv.mkDerivation {
+  name = "shell";
+  nativeBuildInputs = with pkgs; [
+    cargo
+    alejandra
+    rustc
+  ];
+  shellHook = ''
+    alejandra .
+    alejandra ./*
+    cargo run
+  '';
+}
