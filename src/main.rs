@@ -1,5 +1,5 @@
 use actix_web::{get, web, App, HttpServer};
-
+use std::sync::Mutex;
 // This struct represents state
 struct AppState {
     app_name: String,
